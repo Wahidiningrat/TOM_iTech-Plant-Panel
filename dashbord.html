@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Greenhouse Monitoring Dashboard</title>
+  <link rel="stylesheet" href="dashbord.css" />
+</head>
+<body>
+  <div class="dashboard-wrapper" role="main" aria-label="Greenhouse Monitoring Dashboard">
+
+    <nav class="sidebar" aria-label="Main dashboard navigation">
+      <div class="logo" aria-label="Dashboard logo">M</div>
+      <button title="Dashboard">🏠</button>
+      <button title="Settings">⚙️</button>
+      <button title="Logs">📜</button>
+      <button class="add-btn" aria-label="Add new device">+</button>
+    </nav>
+
+    <main class="main-content">
+      
+      <section class="card big-chart" aria-label="Soil Moisture monitoring">
+        <h3>Kelembapan Tanah (%)</h3>
+        <svg class="line-chart" aria-hidden="true" role="presentation" viewBox="0 0 250 100" preserveAspectRatio="none">
+          <polyline class="data1" points="0,80 30,70 60,50 90,40 120,45 150,35 180,52 210,60 240,55"></polyline>
+          <polyline class="data2" points="0,90 30,85 60,75 90,88 120,70 150,60 180,75 210,80 240,78"></polyline>
+        </svg>
+        <small>Data terakhir 24 Jam</small>
+      </section>
+
+      <section class="card" aria-label="Light Intensity">
+        <h3>Intensitas Cahaya (Lux)</h3>
+        <div class="meter light" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
+          <div style="width: 70%;"></div>
+        </div>
+        <p class="percent-used"><strong>700</strong> Lux</p>
+      </section>
+
+      <section class="card" aria-label="Temperature monitoring">
+        <h3>Suhu (°C)</h3>
+        <div class="meter temp" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45">
+          <div style="width: 45%;"></div>
+        </div>
+        <p class="percent-used"><strong>27</strong> °C</p>
+      </section>
+
+      <section class="card" aria-label="Voltage monitoring">
+        <h3>Tegangan (Volt)</h3>
+        <div class="meter voltage" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85">
+          <div style="width: 85%;"></div>
+        </div>
+        <p class="percent-used"><strong>12.8</strong> V</p>
+      </section>
+
+      <section class="card" aria-label="ADC LDR monitoring">
+        <h3>Nilai ADC LDR</h3>
+        <div class="meter ldr" role="progressbar" aria-valuemin="0" aria-valuemax="1023" aria-valuenow="450">
+          <div style="width: 45%;"></div>
+        </div>
+        <p class="percent-used"><strong>450</strong> (dari 1023)</p>
+      </section>
+
+      <section class="card big-chart" aria-label="List of connected devices">
+        <h3>Perangkat Terhubung</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nama Sensor</th>
+              <th>Status</th>
+              <th>Data Terakhir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Kelembapan Tanah</td><td>Online</td><td>10 Menit lalu</td></tr>
+            <tr><td>Intensitas Cahaya</td><td>Online</td><td>5 Menit lalu</td></tr>
+            <tr><td>Suhu</td><td>Online</td><td>2 Menit lalu</td></tr>
+            <tr><td>Tegangan</td><td>Online</td><td>1 Menit lalu</td></tr>
+            <tr><td>ADC LDR</td><td>Online</td><td>30 Detik lalu</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+  </div>
+</body>
+</html>

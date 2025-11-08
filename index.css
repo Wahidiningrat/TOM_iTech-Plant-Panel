@@ -1,0 +1,236 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #1e0f4d;
+  color: #dddde3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 40px 60px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background grid pattern */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(0deg, transparent 24%, #4f3582 25%, #4f3582 26%, transparent 27%, transparent 74%, #4f3582 75%, #4f3582 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, #4f3582 25%, #4f3582 26%, transparent 27%, transparent 74%, #4f3582 75%, #4f3582 76%, transparent 77%, transparent);
+  background-size: 3rem 3rem;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Large radial gradient behind content */
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 160vw;
+  height: 160vw;
+  max-width: 1600px;
+  max-height: 1600px;
+  background:
+    radial-gradient(circle at center, #7f52ffdd 6%, transparent 50%),
+    repeating-radial-gradient(circle at center, transparent 0 58%, #592db988 58% 64%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Header navbar */
+header {
+  width: 100%;
+  max-width: 1120px;
+  padding: 18px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+/* Logo container */
+.logo {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.logo svg {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 3px #9b77ff8a);
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  color: #bba9f9;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #b095ff;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-weight: 600;
+}
+
+/* Mengubah .auth-buttons .login dari span menjadi anchor */
+.auth-buttons .login {
+  color: #bba9f9;
+  cursor: pointer;
+  font-size: 15px;
+  transition: color 0.3s ease;
+  text-decoration: none; /* Tambahkan ini agar tidak ada garis bawah default pada link */
+}
+
+.auth-buttons .login:hover {
+  color: #b095ff;
+}
+
+/* Mengubah .auth-buttons .btn-getstarted dari button menjadi anchor */
+.auth-buttons .btn-getstarted {
+  background: linear-gradient(90deg, #8f5dff 0%, #bb88ff 100%);
+  border-radius: 100px;
+  color: white;
+  padding: 9px 24px;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 10px #a47affaa;
+  transition: background 0.3s ease;
+  text-decoration: none; /* Tambahkan ini */
+  display: inline-block; /* Tambahkan ini agar padding bekerja seperti pada button */
+}
+
+.auth-buttons .btn-getstarted:hover {
+  background: linear-gradient(90deg, #ad78ff 0%, #d0a6ff 100%);
+}
+
+/* Main content */
+main {
+  flex-grow: 1;
+  padding-top: 60px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.main-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  filter: drop-shadow(0 0 15px #a689ffcc);
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 2.8rem;
+  color: white;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+h1 strong {
+  font-weight: 700;
+  color: #dadada;
+}
+
+p.subtitle {
+  font-weight: 400;
+  font-size: 15px;
+  color: #b8a5f7cc;
+  line-height: 1.5;
+  max-width: 500px;
+  margin: 0 auto 36px auto;
+}
+
+/* Buttons below subtitle */
+.btn-group {
+  display: inline-flex;
+  gap: 14px;
+}
+
+/* Mengganti button menjadi anchor (a) untuk group ini */
+.btn-group a {
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 100px;
+  padding: 9px 26px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px #944dff99;
+  text-decoration: none; /* Tambahkan ini */
+  display: inline-block; /* Tambahkan ini */
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #7a39ff 0%, #ad80ff 100%);
+  color: white;
+  box-shadow: 0 5px 15px #9169ffcc;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #9758ff 0%, #d1a8ff 100%);
+  box-shadow: 0 7px 20px #cfaeffdd;
+}
+
+.btn-secondary {
+  background: #261b44;
+  color: #d1c9f6;
+  box-shadow: 0 4px 12px #442f8bbb;
+}
+
+.btn-secondary:hover {
+  background: #392d74;
+  box-shadow: 0 6px 18px #614bbbcc;
+}
+
+/* Brands section */
+.brands {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  max-width: 920px;
+  filter: brightness(0.3);
+  opacity: 0.35;
+  user-select: none;
+  pointer-events: none;
+  flex-wrap: wrap;
+}
+
+.brands img {
+  max-height: 20px;
+  filter: invert(80%) sepia(20%) saturate(600%) hue-rotate(190deg);
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+}

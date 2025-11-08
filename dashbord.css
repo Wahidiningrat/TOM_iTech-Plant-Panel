@@ -1,0 +1,190 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1f2029;
+  color: #c8cdd7;
+  user-select: none;
+  overflow: hidden; /* disable scroll for demo */
+}
+
+/* Wrapper */
+.dashboard-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 70px;
+  background-color: #4c46f1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 30px;
+  font-weight: 600;
+}
+.sidebar .logo {
+  font-size: 28px;
+  font-weight: 900;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin-bottom: 25px;
+  cursor: default;
+}
+.sidebar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.sidebar button:hover {
+  opacity: 1;
+}
+.sidebar .add-btn {
+  margin-top: auto;
+  background: #53e0bc;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-weight: 900;
+  font-size: 24px;
+  box-shadow: 0 0 10px #53e0bcaa;
+}
+
+/* Main area */
+.main-content {
+  flex-grow: 1;
+  padding: 32px 30px 40px 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 24px;
+  overflow-y: auto;
+  background-color: #22232f;
+}
+
+/* Cards */
+.card {
+  background-color: #2b2c3b;
+  border-radius: 8px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card h3 {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #c8cdd7;
+}
+
+/* Chart container for bigger cards */
+.big-chart {
+  grid-column: span 2;
+}
+
+/* Progress bar style */
+.meter {
+  position: relative;
+  height: 14px;
+  background: #393a53;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.meter > div {
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+  background: linear-gradient(90deg,#53e0bc,#4cd1a1);
+}
+
+/* For different meters with color variation */
+.meter.light > div {
+  background: linear-gradient(90deg,#f2a365,#f08a5d);
+}
+.meter.temp > div {
+  background: linear-gradient(90deg,#ff5e62,#ff9966);
+}
+.meter.voltage > div {
+  background: linear-gradient(90deg,#6a11cb,#2575fc);
+}
+.meter.ldr > div {
+  background: linear-gradient(90deg,#fc466b,#3f5efb);
+}
+
+/* Percentage text */
+.percent-used {
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #53e0bc;
+}
+
+/* Line chart svg styling */
+svg.line-chart {
+  width: 100%;
+  height: 100px;
+}
+svg.line-chart polyline {
+  fill: none;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+svg.line-chart .data1 {
+  stroke: #53e0bc;
+}
+svg.line-chart .data2 {
+  stroke: #bf87ff;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ddd;
+  font-size: 0.85rem;
+  box-shadow: inset 0 0 10px rgb(255 255 255 / 0.04);
+  border-radius: 8px;
+  overflow: hidden;
+}
+th, td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #383847;
+  text-align: left;
+}
+th {
+  background-color: #393a53;
+  font-weight: 700;
+  color: #c8cdd7;
+}
+tbody tr:hover {
+  background-color: #444559;
+  cursor: default;
+}
+
+/* Responsive for smaller screen */
+@media (max-width: 960px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  .big-chart {
+    grid-column: auto;
+  }
+}
