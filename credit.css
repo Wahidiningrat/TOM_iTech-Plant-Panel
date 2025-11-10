@@ -1,0 +1,240 @@
+/* RESET & FONT */
+body {
+  background-color: #0a0a23;
+  color: #c6b5ff;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+/* === NAVBAR === */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #080824;
+  padding: 0 1.5rem;
+  height: 56px;
+  box-shadow: 0 0 20px #6328ff44 inset;
+  border-bottom: 1px solid #3e2ca1;
+  font-size: 0.9rem;
+  color: #bb99ff;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #bb99ff;
+  display: flex;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+.nav-toggle:hover {
+  color: #d1aaff;
+}
+.nav-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #bb99ff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.nav-logo svg {
+  fill: #bb99ff;
+  width: 32px;
+  height: 32px;
+}
+.nav-logo:hover {
+  color: #d1aaff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.7rem;
+  font-weight: 600;
+  align-items: center;
+  user-select: none;
+}
+.nav-link {
+  color: #a08eff;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link:focus {
+  color: #c3afff;
+}
+.nav-link.active {
+  color: #d1aaff;
+}
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #a569ff, #c59eff);
+  border-radius: 2px;
+}
+
+.badge {
+  background-color: #7041ff;
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  padding: 0 6px;
+  margin-left: 4px;
+  font-weight: 600;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  user-select: none;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #bb99ff;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.icon-button:hover,
+.icon-button:focus {
+  color: #d1aaff;
+}
+
+.profile-button img {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  transform-origin: center;
+  transition: box-shadow 0.3s ease;
+}
+.profile-button:hover img,
+.profile-button:focus img {
+  box-shadow: 0 0 8px #c59eff, 0 0 15px #d1aaff;
+}
+
+/* === CONTRIBUTORS === */
+
+.contributors {
+  max-width: 850px;
+  margin: 2rem auto 4rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.contributors h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #a569ff;
+  text-shadow:
+    0 0 5px #b684ff,
+    0 0 10px #9f7eff,
+    0 0 20px #8b63ff;
+  user-select: none;
+}
+
+.contributor-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contributor {
+  background: linear-gradient(145deg, #1c1359, #280c7a);
+  border-radius: 12px;
+  padding: 0.8rem;
+  width: 110px;
+  box-shadow:
+    0 0 10px #a468ff66,
+    inset 0 0 15px #b383ffaa;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.contributor:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow:
+    0 0 25px #b383ffaa,
+    inset 0 0 20px #c8a3ffcc;
+}
+
+.contributor img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  box-shadow:
+    0 0 8px #bb99ffcc inset,
+    0 0 15px #bb99ffcc;
+  transition: border-color 0.3s ease;
+}
+
+.contributor:hover img {
+  border-color: #c59eff;
+  box-shadow:
+    0 0 15px #c59eff,
+    0 0 15px #d1aaff inset;
+}
+
+.contributor a {
+  margin-top: 0.7rem;
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #c6b5ff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  overflow-wrap: anywhere;
+}
+
+.contributor a:hover {
+  color: #d1aaff;
+  text-shadow:
+    0 0 6px #bb99ff,
+    0 0 10px #bb99ff;
+}
