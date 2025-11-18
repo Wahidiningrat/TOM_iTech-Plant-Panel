@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const loginLink = document.getElementById('login-link');
     const userProfileDiv = document.getElementById('user-profile');
+    const toPanelLink = document.getElementById('to-panel-link'); // Link "To Panel"
+    const getStartedLink = document.getElementById('get-started-link'); // Link "Get Started"
     
     // Cek status login dari Local Storage.
     // Status ini disetel di halaman loginpage.html setelah berhasil login.
@@ -27,5 +29,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Fungsi baru untuk mengupdate tombol "To Panel" dan "Get Started"
+    function updateButtonAccess() {
+        if (statusLogin === 'true') {
+            // Jika sudah login, tampilkan tombol
+            if (toPanelLink) {
+                toPanelLink.style.display = 'inline-block';
+            }
+            if (getStartedLink) {
+                getStartedLink.style.display = 'inline-block';
+            }
+        } else {
+            // Jika belum login, sembunyikan tombol
+            if (toPanelLink) {
+                toPanelLink.style.display = 'none';
+            }
+            if (getStartedLink) {
+                getStartedLink.style.display = 'none';
+            }
+        }
+    }
+
     updateHeaderStatus();
+    updateButtonAccess(); // Panggil fungsi baru
 });
