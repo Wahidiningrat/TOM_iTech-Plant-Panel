@@ -241,9 +241,16 @@ document.addEventListener('DOMContentLoaded', () => {
     successMessage.textContent = '✅ Settings saved successfully!';
     settingsForm.insertBefore(successMessage, settingsForm.firstChild);
 
-    setTimeout(() => {
-      closeModal();
-    }, 1500);
+    if (deviceKey === 'networkSettings') {
+      setTimeout(() => {
+        closeModal();
+        showArduinoCode(savedSettings);
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        closeModal();
+      }, 1500);
+    }
   });
 
   const searchBox = document.getElementById('searchBox');
@@ -261,4 +268,116 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  function showArduinoCode(networkSettings) {
+    const ssid = networkSettings.wifiSSID || 'YOUR_WIFI_SSID';
+    const password = networkSettings.wifiPassword || 'YOUR_WIFI_PASSWORD';
+    const ip = networkSettings.esp32IP || '192.168.1.100';
+
+    const arduinoCode = `// ESP32 WiFi Configuration
+// Copy this code to your ESP32 Arduino sketch
+
+#include <WiFi.h>
+#include <WebServer.h>
+
+const char* ssid = "${ssid}";
+const char* password = "${password}";
+
+WebServer server(80);
+
+void setup() {
+  Serial.begin(115200);
+  
+  // Connect to WiFi
+  Serial.println("");
+  Serial.println("Connecting to WiFi...");
+  Serial.print("SSID: ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  int attempts = 0;
+  while (WiFi.status() != WL_CONNECTED && attempts < 30) {
+    delay(500);
+    Serial.print(".");
+    attempts++;
+  }
+  
+  Serial.println("");
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("WiFi connected");
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+    Serial.println("Configure this IP in TOM_iTECH Dashboard Network Settings");
+  } else {
+    Serial.println("WiFi connection failed!");
+    Serial.println("Please check SSID and password");
+  }
+  
+  // Your sensor setup code here...
+}
+
+void loop() {
+  // Your sensor reading code here...
+}
+
+// Expected IP from settings: ${ip}
+// Make sure to update the dashboard with the actual IP shown in Serial Monitor`;
+
+    const codeModal = document.createElement('div');
+    codeModal.className = 'modal show';
+    codeModal.style.cssText = 'display: flex; position: fixed; z-index: 2000; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0, 128, 0, 0.9); backdrop-filter: blur(5px); justify-content: center; align-items: center; padding: 1rem;';
+    
+    const codeContent = document.createElement('div');
+    codeContent.style.cssText = 'background: linear-gradient(135deg, #228B22, #32CD32); border: 2px solid #FFFF00; border-radius: 15px; width: 100%; max-width: 700px; max-height: 80vh; padding: 2rem; box-shadow: 0 0 25px #FFFF00; position: relative; color: #e7defc; overflow-y: auto;';
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '×';
+    closeBtn.style.cssText = 'position: absolute; top: 12px; right: 15px; background: transparent; border: none; color: #e7defc; font-size: 2rem; cursor: pointer; transition: color 0.3s ease;';
+    closeBtn.onmouseover = () => closeBtn.style.color = '#FFFF00';
+    closeBtn.onmouseout = () => closeBtn.style.color = '#e7defc';
+    closeBtn.onclick = () => document.body.removeChild(codeModal);
+    
+    const title = document.createElement('h2');
+    title.textContent = '📋 ESP32 Arduino Code';
+    title.style.cssText = 'margin-bottom: 1rem; text-align: center; color: #FFFF00;';
+    
+    const description = document.createElement('p');
+    description.textContent = 'Copy this code to your ESP32 Arduino sketch:';
+    description.style.cssText = 'margin-bottom: 1rem; color: #90EE90; text-align: center;';
+    
+    const codeArea = document.createElement('textarea');
+    codeArea.value = arduinoCode;
+    codeArea.readOnly = true;
+    codeArea.style.cssText = 'width: 100%; height: 350px; background: #1e1e1e; color: #dcdcdc; border: 1px solid #32CD32; border-radius: 8px; padding: 15px; font-family: "Courier New", monospace; font-size: 13px; line-height: 1.5; resize: vertical;';
+    
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = '📋 Copy to Clipboard';
+    copyBtn.style.cssText = 'background: linear-gradient(90deg, #32CD32, #90EE90); border: none; color: white; padding: 0.8rem 1.5rem; font-weight: 700; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 1rem; transition: background-color 0.3s ease;';
+    copyBtn.onmouseover = () => copyBtn.style.background = 'linear-gradient(90deg, #FFFF00, #FFD700)';
+    copyBtn.onmouseout = () => copyBtn.style.background = 'linear-gradient(90deg, #32CD32, #90EE90)';
+    copyBtn.onclick = () => {
+      codeArea.select();
+      document.execCommand('copy');
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => {
+        copyBtn.textContent = '📋 Copy to Clipboard';
+      }, 2000);
+    };
+    
+    const note = document.createElement('p');
+    note.innerHTML = `<strong>Note:</strong> Upload this code to ESP32, then check the Serial Monitor for the actual IP address. Update the Network Settings with the real IP if different from expected: <code style="background: #1e1e1e; padding: 2px 6px; border-radius: 4px; color: #FFFF00;">${ip}</code>`;
+    note.style.cssText = 'margin-top: 1rem; font-size: 0.9rem; color: #c8cdd7; text-align: center;';
+    
+    codeContent.appendChild(closeBtn);
+    codeContent.appendChild(title);
+    codeContent.appendChild(description);
+    codeContent.appendChild(codeArea);
+    codeContent.appendChild(copyBtn);
+    codeContent.appendChild(note);
+    codeModal.appendChild(codeContent);
+    document.body.appendChild(codeModal);
+    
+    codeArea.select();
+  }
 });

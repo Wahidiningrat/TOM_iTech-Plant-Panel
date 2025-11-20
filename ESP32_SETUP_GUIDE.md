@@ -1,5 +1,45 @@
 # 📡 Panduan Koneksi ESP32 ke Dashboard
 
+## 🚀 NEW: Arduino Code Generator (Cara Termudah!)
+
+### ⚡ Setup ESP32 dalam 5 Langkah:
+
+**Step 1: Buka Settings**
+- Dashboard → Settings (⚙️) → Network tab → Click "Configure"
+
+**Step 2: Isi WiFi Credentials**
+- WiFi SSID: Nama WiFi Anda
+- WiFi Password: Password WiFi Anda
+- ESP32 IP: (opsional, bisa dikosongkan dulu)
+- Click "Save Settings"
+
+**Step 3: Copy Auto-Generated Code**
+- Modal "📋 ESP32 Arduino Code" otomatis muncul
+- Code sudah berisi WiFi SSID & Password Anda!
+- Click "📋 Copy to Clipboard"
+
+**Step 4: Upload ke ESP32**
+- Buka Arduino IDE
+- Paste code yang sudah dicopy
+- Upload ke ESP32
+- Buka Serial Monitor (115200 baud)
+
+**Step 5: Update IP di Dashboard**
+- Lihat IP di Serial Monitor (contoh: 192.168.1.105)
+- Kembali ke Settings → Network → Configure
+- Update "ESP32 IP Address" dengan IP actual
+- Save Settings
+- **Dashboard langsung terhubung ke ESP32!** 🎉
+
+### ✅ Keuntungan Method Baru:
+- ⚡ **Super Cepat**: 5 langkah saja!
+- 🔒 **No Typo**: SSID & password otomatis terisi
+- 📋 **One-Click Copy**: Langsung copy ke clipboard
+- 📊 **Professional Serial Output**: Serial Monitor informatif
+- 🎯 **Step-by-step Guide**: Instructions langsung di ESP32
+
+---
+
 ## 🎯 Cara Kerja
 
 Dashboard TOM_iTECH sekarang dapat terhubung **langsung** ke ESP32 Anda tanpa memerlukan server backend. Dashboard akan mengambil data sensor secara real-time melalui koneksi HTTP lokal.

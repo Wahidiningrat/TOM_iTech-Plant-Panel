@@ -92,17 +92,27 @@
 
 **Pengaturan:**
 - **ESP32 IP Address**: Alamat IP ESP32 Anda (contoh: 192.168.1.100)
-- **WiFi SSID**: Nama jaringan WiFi
-- **WiFi Password**: Password WiFi (untuk referensi, tidak dikirim ke ESP32)
+- **WiFi SSID**: Nama jaringan WiFi untuk ESP32
+- **WiFi Password**: Password WiFi untuk ESP32
 - **Auto-Refresh Interval**: Interval refresh data dari ESP32 (1-60 detik)
 
 **Cara Kerja:**
-1. Masukkan IP ESP32
-2. Klik "Save Settings"
-3. Dashboard akan otomatis menggunakan IP ini untuk koneksi
-4. Refresh interval diterapkan langsung ke auto-refresh timer
+1. Masukkan WiFi SSID dan Password yang akan digunakan ESP32
+2. Masukkan IP Address yang diharapkan (opsional)
+3. Klik "Save Settings"
+4. **OTOMATIS**: Modal baru akan muncul dengan Arduino code!
+5. Copy code tersebut ke Arduino IDE
+6. Upload ke ESP32
+7. Buka Serial Monitor (115200 baud) untuk melihat IP actual
+8. Update Network Settings dengan IP actual jika berbeda
 
-**Catatan:** Saat ini WiFi SSID dan Password hanya untuk dokumentasi/referensi. Konfigurasi WiFi ESP32 dilakukan di kode Arduino.
+**Fitur Arduino Code Generator:**
+- ✅ Otomatis generate WiFi configuration code
+- ✅ SSID dan Password sudah terisi dari settings Anda
+- ✅ Serial.println yang informatif dan terstruktur
+- ✅ Error handling untuk WiFi connection failure
+- ✅ Copy to clipboard dengan 1 klik
+- ✅ Step-by-step instructions di Serial Monitor
 
 ---
 
@@ -290,6 +300,90 @@ localStorage.removeItem('tom_itech_settings');
 
 ---
 
+## 🎯 Arduino Code Generator (NEW!)
+
+### Cara Menggunakan:
+
+**Step 1: Konfigurasi WiFi**
+1. Buka Settings > Network tab
+2. Klik "Configure" pada Network Settings
+3. Isi form:
+   - **WiFi SSID**: Nama WiFi Anda (contoh: "Home_WiFi")
+   - **WiFi Password**: Password WiFi Anda
+   - **ESP32 IP**: IP yang diharapkan (opsional)
+   - **Auto-Refresh**: Interval refresh (default: 5 detik)
+4. Klik "Save Settings"
+
+**Step 2: Copy Arduino Code**
+- Modal baru otomatis muncul dengan title "📋 ESP32 Arduino Code"
+- Code sudah berisi SSID dan Password Anda!
+- Klik "📋 Copy to Clipboard"
+- Code tersalin otomatis
+
+**Step 3: Upload ke ESP32**
+1. Buka Arduino IDE
+2. Paste code yang sudah dicopy
+3. Add sensor reading code Anda di bagian yang ditandai
+4. Upload ke ESP32
+5. Buka Serial Monitor (115200 baud)
+
+**Step 4: Lihat IP di Serial Monitor**
+```
+========================================
+  TOM_iTECH Plant Monitoring System
+========================================
+
+Connecting to WiFi...
+SSID: Home_WiFi
+Password: ********
+Status: .....
+
+✓ WiFi Connected Successfully!
+----------------------------------------
+IP address: 192.168.1.105
+Signal Strength: -45 dBm
+----------------------------------------
+
+IMPORTANT:
+1. Copy the IP address above
+2. Open TOM_iTECH Dashboard
+3. Go to Settings > Network
+4. Paste the IP in 'ESP32 IP Address'
+5. Click Save Settings
+
+✓ HTTP Server Started
+Waiting for dashboard requests...
+========================================
+```
+
+**Step 5: Update Dashboard dengan IP Actual**
+1. Copy IP dari Serial Monitor (contoh: 192.168.1.105)
+2. Kembali ke TOM_iTECH Dashboard
+3. Settings > Network > Configure
+4. Update "ESP32 IP Address" dengan IP actual
+5. Save Settings
+
+### Keuntungan Arduino Code Generator:
+
+✅ **No Manual Typing**: SSID & password otomatis terisi
+✅ **Error-Free**: Tidak ada typo di SSID/password
+✅ **Professional Serial Output**: Serial Monitor terstruktur dan informatif
+✅ **WiFi Diagnostics**: Tampilkan signal strength dan troubleshooting tips
+✅ **Step-by-step Guide**: Instructions langsung di Serial Monitor
+✅ **One-Click Copy**: Copy code dengan 1 klik
+
+### Serial.println yang Dihasilkan:
+
+Code generator menghasilkan Serial.println yang:
+- ✅ Terstruktur dengan border (`====`)
+- ✅ Informative (SSID, password masking, signal strength)
+- ✅ Error handling (connection failure dengan troubleshooting)
+- ✅ User guidance (step-by-step instructions)
+- ✅ Status indicators (✓ success, ✗ failure)
+- ✅ Sensor readings setiap 5 detik
+
+---
+
 ## 🚀 Fitur Mendatang
 
 - [ ] Kustomisasi alert cooldown per sensor
@@ -298,6 +392,7 @@ localStorage.removeItem('tom_itech_settings');
 - [ ] Email/SMS/Push notification integration
 - [ ] Grafik real-time untuk sensor history
 - [ ] Notifikasi browser (Web Notifications API)
+- [ ] Download Arduino .ino file langsung dari settings
 
 ---
 

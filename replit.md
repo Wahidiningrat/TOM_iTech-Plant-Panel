@@ -10,59 +10,109 @@
 - 🌱 Soil moisture
 - ☀️ Light intensity
 
-This is a frontend-only dashboard built with HTML, CSS, and vanilla JavaScript. The project includes:
+This is a full-stack application with an Express backend and vanilla JavaScript frontend. The project includes:
 - Landing page with navigation
-- User authentication (login/profile using localStorage)
+- **User authentication via Replit Auth** (supports Google, GitHub, X, Apple, email/password)
 - Main monitoring dashboard with sensor data visualization
 - AI chat integration (using Gemini API)
 - Settings and user profile pages
+- PostgreSQL database for user sessions and data
 
 ## Project Structure
 
 ```
 .
-├── index.html              # Landing page
-├── index.css               # Landing page styles
-├── index.js                # Landing page logic (login state management)
-├── dashbord.html           # Main monitoring dashboard
-├── dashbord.css            # Dashboard styles
-├── dashbord.js             # ESP32 connection & data fetching logic
-├── loginpage.html          # Login page
-├── loginpage.js            # Login logic
-├── userprofile.html        # User profile page
-├── AIchat.html             # AI chat interface
-├── script.js               # Gemini API integration
-├── setting.html            # Settings page
-├── Features.html           # Features page
-├── overview.html           # Overview page
-├── credit.html             # Contributors page
-├── ESP32_EXAMPLE.ino       # Example ESP32 Arduino code
-├── ESP32_SETUP_GUIDE.md    # Comprehensive ESP32 setup guide
-├── SETTINGS_GUIDE.md       # Complete settings & alerts guide
-└── README.md               # Project documentation
+├── server/                 # Backend (Express + TypeScript)
+│   ├── index.ts           # Main server entry point
+│   ├── routes.ts          # API routes
+│   ├── replitAuth.ts      # Replit Auth configuration
+│   ├── db.ts              # Database connection
+│   └── storage.ts         # User storage operations
+├── shared/                # Shared code
+│   └── schema.ts          # Database schema (Drizzle ORM)
+├── client/                # Client utilities
+│   └── auth.js            # Authentication helpers
+├── index.html             # Landing page
+├── index.css              # Landing page styles
+├── index.js               # Landing page logic
+├── dashbord.html          # Main monitoring dashboard
+├── dashbord.css           # Dashboard styles
+├── dashbord.js            # ESP32 connection & data fetching logic
+├── loginpage.html         # Login page (redirects to Replit Auth)
+├── loginpage.js           # Login redirect logic
+├── userprofile.html       # User profile page
+├── userprofile.js         # Profile data loading
+├── AIchat.html            # AI chat interface
+├── script.js              # Gemini API integration
+├── setting.html           # Settings page
+├── Features.html          # Features page
+├── overview.html          # Overview page
+├── credit.html            # Contributors page
+├── ESP32_EXAMPLE.ino      # Example ESP32 Arduino code
+├── ESP32_SETUP_GUIDE.md   # Comprehensive ESP32 setup guide
+├── SETTINGS_GUIDE.md      # Complete settings & alerts guide
+├── package.json           # Node.js dependencies
+├── tsconfig.json          # TypeScript configuration
+└── drizzle.config.ts      # Database configuration
 ```
 
 ## Technology Stack
 
 | Component | Technology |
 |-----------|------------|
+| Backend | Node.js 20, Express 5, TypeScript |
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Database | PostgreSQL (Neon) via Drizzle ORM |
+| Authentication | Replit Auth (OpenID Connect) |
 | IoT Hardware | ESP32 (WiFi enabled) |
 | IoT Communication | HTTP/JSON (direct local connection) |
 | AI Integration | Google Gemini API |
-| Storage | localStorage (for login state & ESP32 IP) |
-| Server | Python HTTP Server (development) |
+| Session Storage | PostgreSQL with connect-pg-simple |
 
 ## Running the Application
 
-The application is configured to run on port 5000 using Python's built-in HTTP server:
+The application runs on port 5000 using the Express backend:
 ```bash
-python -m http.server 5000 --bind 0.0.0.0
+npm run dev
 ```
 
 The workflow "Start application" is configured to automatically start the server.
 
+### Available Scripts:
+- `npm run dev` - Start development server with hot reload
+- `npm run start` - Start production server
+- `npm run db:push` - Push database schema changes
+- `npm run db:push:force` - Force push schema changes
+
 ## Recent Changes
+
+- **2025-11-19**: **Added Replit Auth Integration** 🔐
+  - Replaced insecure hardcoded login (admin_TOM/admin_TOM) with professional authentication
+  - Integrated Replit Auth supporting Google, GitHub, X, Apple, and email/password login
+  - Set up Express backend with TypeScript for secure API routes
+  - Added PostgreSQL database for user sessions and data storage
+  - Implemented secure session management with connect-pg-simple
+  - Fixed critical host-header manipulation vulnerability with domain allowlisting
+  - Updated frontend to check authentication via `/api/auth/user`
+  - Added logout functionality via `/api/logout`
+  - User profile now displays authenticated user's name, email, and profile picture
+  - Authentication state persists across page reloads via secure sessions
+  - **Backend API Routes:**
+    - `GET /api/login` - Initiate Replit Auth login flow
+    - `GET /api/callback` - OAuth callback handler
+    - `GET /api/logout` - Logout and clear session
+    - `GET /api/auth/user` - Get current authenticated user (protected)
+
+
+- **2025-11-18**: Added Arduino Code Generator (Network Settings)
+  - Network Settings now auto-generates Arduino code with WiFi credentials
+  - Save Network Settings → Arduino code modal appears automatically
+  - Code includes SSID, password, and professional Serial.println statements
+  - One-click copy to clipboard functionality
+  - Improved ESP32_EXAMPLE.ino with structured Serial output
+  - Serial Monitor shows WiFi diagnostics, signal strength, and setup instructions
+  - Error handling with troubleshooting tips in Serial Monitor
+  - Sensor readings logged every 5 seconds to Serial
 
 - **2025-11-18**: Added Smart Settings & Alert System
   - Updated `setting.js` to save/load settings from localStorage
